@@ -4,7 +4,7 @@ export class Ajax extends Helpers {
     path: string,
     parameters = {},
     method = 'get',
-    headers = {
+    headers:any = {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   ) {

@@ -6,7 +6,7 @@ El script esta escrito en TS
 ## QuickStart
 Primero ocupas importar la libreria (En caso de TS (proximamente vanilla)).
 
-`import { Wordpress } from './Commons/Consumers/Wordpress/Wordpress';`
+`import { Wordpress } from './Commons/Consumers/Wordpress/Wordpress.js';`
 
 Para inicializar el SDK solo ocupas correr la siguiente linea
 
@@ -61,7 +61,7 @@ ejemplo de uso
 await wp.types().get()
 ```
 
-## estatus
+## Estatus
 
 `wp.statuses()` 
 
@@ -72,7 +72,7 @@ ejemplo de uso
 await wp.statuses().get()
 ```
 
-## taxonomies
+## Taxonomias
 
 `wp.taxonomies()` 
 
@@ -83,7 +83,7 @@ ejemplo de uso
 await wp.taxonomies().get()
 ```
 
-## categories
+## Categorias
 
 `wp.categories()` 
 
@@ -105,7 +105,7 @@ ejemplo de uso
 await wp.tags().get()
 ```
 
-## users
+## Usuarios
 
 `wp.users()` 
 
@@ -116,7 +116,7 @@ ejemplo de uso
 await wp.users().get()
 ```
 
-## comments
+## Comentarios
 
 `wp.comments()` 
 

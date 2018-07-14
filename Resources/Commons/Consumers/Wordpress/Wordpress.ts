@@ -1,81 +1,53 @@
-import { Ajax } from '../../../Tools/Ajax.js';
 import { IWPosts, IWPages, IWMedia } from './iWPosts.js';
-enum WP {
-    sufix = '/wp-json/wp/v2',
-    posts = '/posts',
-    pages = '/pages',
-    media = '/media',
-    types = '/types',
-    statuses = '/statuses',
-    taxonomies = '/taxonomies',
-    categories = '/categories',
-    tags = '/tags',
-    users = '/users',
-    comments = '/comments',
-    settings = '/settings',
-}
-export class Wordpress extends Ajax implements iConsumer {
+import { WPAjax, WP } from './WPAjax.js';
+export class Wordpress {
     public path: string;
-    public filter: any;
-    public runPath: string;
-    constructor(path: string) {
-        super();
-        this.runPath=''; 
-        this.path = path + WP.sufix;
-    }
-    async get() {
-        return this.fetchData(this.runPath, this.filter);
+    public wpfetch: WPAjax;
+    public nonce: string;
+    constructor(path: string, nonce: string = '') {
+        this.path = path;
+        this.nonce = nonce;
     }
     show(id: Number) {
         throw new Error('Method not implemented.');
     }
     posts(filters: IWPosts = {}) {
-        this.runPath = this.path + WP.posts;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.posts);
     }
     pages(filters: IWPages = {}) {
-        this.runPath = this.path + WP.pages;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.pages);
     }
     media(filters: IWMedia = {}) {
-        this.runPath = this.path + WP.media;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.media);
     }
     types(filters: any = {}) {
-        this.runPath = this.path + WP.types;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.types);
     }
     statuses(filters: any = {}) {
-        this.runPath = this.path + WP.statuses;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.statuses);
     }
     taxonomies(filters: any = {}) {
-        this.runPath = this.path + WP.taxonomies;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.taxonomies);
     }
     categories(filters: any = {}) {
-        this.runPath = this.path + WP.categories;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.categories);
     }
     tags(filters: any = {}) {
-        this.runPath = this.path + WP.tags;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.tags);
     }
     users(filters: any = {}) {
-        this.runPath = this.path + WP.users;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.users);
     }
     comments(filters: any = {}) {
-        this.runPath = this.path + WP.comments;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.comments);
     }
     settings(filters: any = {}) {
-        this.runPath = this.path + WP.settings;
-        return this.setFetcher(filters);
+        return this.setFetcher(filters, WP.settings);
     }
-    setFetcher(filters: any) {
-        this.filter = filters;
-        return this;
+    setFetcher(filters: any, wpRoute: string) {
+        const wpfetch = new WPAjax(this.path, this.nonce);
+        wpfetch.filter = filters;
+        wpfetch.route = wpRoute;
+        return wpfetch;
     }
-
 }

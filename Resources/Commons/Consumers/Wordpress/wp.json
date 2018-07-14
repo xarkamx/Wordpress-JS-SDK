@@ -1,0 +1,125 @@
+{
+    "date": {
+        "required": false,
+        "description": "La fecha de publicación del objeto, en el huso horario del sitio.",
+        "type": "string"
+    },
+    "date_gmt": {
+        "required": false,
+        "description": "La fecha de publicación del objeto, como GMT.",
+        "type": "string"
+    },
+    "slug": {
+        "required": false,
+        "description": "Un identificador alfanumérico para el objeto único para su tipo.",
+        "type": "string"
+    },
+    "status": {
+        "required": false,
+        "enum": [
+            "publish",
+            "future",
+            "draft",
+            "pending",
+            "private"
+        ],
+        "description": "Un nombre de estado para el objeto.",
+        "type": "string"
+    },
+    "password": {
+        "required": false,
+        "description": "Una contraseña para proteger el acceso al contenido y al extracto.",
+        "type": "string"
+    },
+    "title": {
+        "required": false,
+        "description": "El título para el objeto.",
+        "type": "object"
+    },
+    "content": {
+        "required": false,
+        "description": "El contenido para el objeto.",
+        "type": "object"
+    },
+    "author": {
+        "required": false,
+        "description": "El ID del autor del objeto.",
+        "type": "integer"
+    },
+    "excerpt": {
+        "required": false,
+        "description": "El extracto del objeto.",
+        "type": "object"
+    },
+    "featured_media": {
+        "required": false,
+        "description": "El ID de la imagen destacada para el objeto.",
+        "type": "integer"
+    },
+    "comment_status": {
+        "required": false,
+        "enum": [
+            "open",
+            "closed"
+        ],
+        "description": "Si los comentarios están abiertos en el objeto o no.",
+        "type": "string"
+    },
+    "ping_status": {
+        "required": false,
+        "enum": [
+            "open",
+            "closed"
+        ],
+        "description": "Se puede o no hacer ping al objeto.",
+        "type": "string"
+    },
+    "format": {
+        "required": false,
+        "enum": [
+            "standard",
+            "aside",
+            "chat",
+            "gallery",
+            "link",
+            "image",
+            "quote",
+            "status",
+            "video",
+            "audio"
+        ],
+        "description": "El formato del objeto.",
+        "type": "string"
+    },
+    "meta": {
+        "required": false,
+        "description": "Campos meta.",
+        "type": "object"
+    },
+    "sticky": {
+        "required": false,
+        "description": "Sea o no el objeto debe ser tratado como fijo.",
+        "type": "boolean"
+    },
+    "template": {
+        "required": false,
+        "description": "El fichero del tema a usar para mostrar el objeto.",
+        "type": "string"
+    },
+    "categories": {
+        "required": false,
+        "description": "Los términos asignados al objeto en la taxonomía category.",
+        "type": "array",
+        "items": {
+            "type": "integer"
+        }
+    },
+    "tags": {
+        "required": false,
+        "description": "Los términos asignados al objeto en la taxonomía post_tag.",
+        "type": "array",
+        "items": {
+            "type": "integer"
+        }
+    }
+}
