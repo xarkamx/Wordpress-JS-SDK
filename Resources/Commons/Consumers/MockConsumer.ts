@@ -1,5 +1,5 @@
-import { Paths } from './PathsEnums';
-import { Ajax } from '../../Tools/Ajax';
+import { Paths } from './PathsEnums.js';
+import { Ajax } from '../../Tools/Ajax.js';
 export class MockConsumer extends Ajax implements iConsumer {
   public get() {}
   public async show(id: Number) {

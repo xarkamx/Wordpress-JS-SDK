@@ -1,5 +1,5 @@
-import { Ajax } from '../../../Tools/Ajax';
-import { IWPosts, IWPages, IWMedia } from './iWPosts';
+import { Ajax } from '../../../Tools/Ajax.js';
+import { IWPosts, IWPages, IWMedia } from './iWPosts.js';
 enum WP {
     sufix = '/wp-json/wp/v2',
     posts = '/posts',
@@ -20,6 +20,7 @@ export class Wordpress extends Ajax implements iConsumer {
     public runPath: string;
     constructor(path: string) {
         super();
+        this.runPath=''; 
         this.path = path + WP.sufix;
     }
     async get() {

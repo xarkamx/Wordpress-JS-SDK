@@ -1,4 +1,4 @@
-import { Helpers } from './Helpers';
+import { Helpers } from './Helpers.js';
 export class Ajax extends Helpers {
   async fetchData(
     path: string,
