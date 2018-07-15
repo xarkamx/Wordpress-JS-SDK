@@ -26,6 +26,7 @@ export class Ajax extends Helpers {
                 args.body = parameters;
             }
             args.method = method;
+            console.table(args.body);
             const data = yield fetch(path, args);
             const result = yield data.text();
             try {

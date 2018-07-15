@@ -24,10 +24,10 @@ export var WP;
     WP["settings"] = "/settings";
 })(WP || (WP = {}));
 export class WPAjax extends Ajax {
-    constructor(url, nonce = "") {
+    constructor(url, credentials = null) {
         super();
         this.url = url;
-        this.nonce = nonce;
+        this.credentials = credentials;
         this.path = this.url + WP.sufix;
     }
     get() {
@@ -44,14 +44,14 @@ export class WPAjax extends Ajax {
     }
     publish() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (this.nonce == '') {
-                console.error("No puedes hacer publicaciones sin tu clave unica");
-                return false;
-            }
+            const userData = yield this.access.getUserData(this.url, this.credentials);
+            const token = userData.token;
             yield this.validateRules(this.route, this.filter, 'post');
             const postPath = this.path + this.route;
-            return this.fetchData(postPath, this.publishData, 'post', {
-                'X-WP-Nonce': this.nonce
+            console.log(this.filter);
+            return this.fetchData(postPath, this.filter, 'post', {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/x-www-form-urlencoded'
             });
         });
     }

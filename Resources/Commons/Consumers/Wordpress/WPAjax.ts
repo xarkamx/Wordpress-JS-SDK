@@ -16,17 +16,18 @@ export enum WP {
 }
 export class WPAjax extends Ajax implements iConsumer {
     public url: string;
+    public access: any;
     public filter: any;
     public runPath: string;
-    public nonce: string;
+    public credentials: string;
     public publishData: any;
     public rules: any;
     public route: string;
     public path: string;
-    constructor(url: string, nonce: string = "") {
+    constructor(url: string, credentials: any = null) {
         super();
         this.url = url;
-        this.nonce = nonce;
+        this.credentials = credentials;
         this.path = this.url + WP.sufix;
     }
     async get() {
@@ -39,15 +40,14 @@ export class WPAjax extends Ajax implements iConsumer {
     }
 
     async publish() {
-
-        if (this.nonce == '') {
-            console.error("No puedes hacer publicaciones sin tu clave unica");
-            return false;
-        }
+        const userData = await this.access.getUserData(this.url, this.credentials);
+        const token = userData.token;
         await this.validateRules(this.route, this.filter, 'post');
         const postPath = this.path + this.route;
-        return this.fetchData(postPath, this.publishData, 'post', {
-            'X-WP-Nonce': this.nonce
+        console.log(this.filter);
+        return this.fetchData(postPath, this.filter, 'post', {
+            'Authorization': 'Bearer ' + token,
+            'Content-Type': 'application/x-www-form-urlencoded'
         });
     }
     async getRules() {

@@ -1,12 +1,21 @@
 import { IWPosts, IWPages, IWMedia } from './iWPosts.js';
 import { WPAjax, WP } from './WPAjax.js';
+import { JWTAccess } from './jwtAccess.js';
 export class Wordpress {
     public path: string;
     public wpfetch: WPAjax;
-    public nonce: string;
-    constructor(path: string, nonce: string = '') {
+    public access: JWTAccess;
+    public credentials: iJWTCredentials;
+    constructor(path: string, credentials: iJWTCredentials = null, access: JWTAccess = null) {
         this.path = path;
-        this.nonce = nonce;
+        this.credentials = credentials;
+        this.access = (access == null) ? new JWTAccess() : access;
+        if (credentials != null) {
+            this.injectAccess(this.access);
+        }
+    }
+    injectAccess(access: JWTAccess) {
+        WPAjax.prototype.access = this.access;
     }
     show(id: Number) {
         throw new Error('Method not implemented.');
@@ -45,7 +54,7 @@ export class Wordpress {
         return this.setFetcher(filters, WP.settings);
     }
     setFetcher(filters: any, wpRoute: string) {
-        const wpfetch = new WPAjax(this.path, this.nonce);
+        const wpfetch = new WPAjax(this.path, this.credentials);
         wpfetch.filter = filters;
         wpfetch.route = wpRoute;
         return wpfetch;

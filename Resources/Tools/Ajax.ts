@@ -4,7 +4,7 @@ export class Ajax extends Helpers {
     path: string,
     parameters = {},
     method = 'get',
-    headers:any = {
+    headers: any = {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   ) {
@@ -21,6 +21,7 @@ export class Ajax extends Helpers {
       args.body = parameters;
     }
     args.method = method;
+    console.table(args.body)
     const data = await fetch(path, args);
     const result = await data.text();
     try {

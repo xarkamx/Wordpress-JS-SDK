@@ -10,7 +10,20 @@ Primero ocupas importar la libreria (En caso de TS (proximamente vanilla)).
 
 Para inicializar el SDK solo ocupas correr la siguiente linea
 
-`const wp = new Wordpress('http://demo.wp-api.org/')`
+```
+const wp = new Wordpress(
+  path: string,
+  credentials: iJWTCredentials = null,
+  access: JWTAccess = null
+)
+```
+### Donde:
+
+`path` es la ruta de tu wordpress
+
+`credentials` es un objeto que consiste en las credenciales de tu WP (`username` y `password` por lo general).
+
+`access` indica la clase que manejara las reglas de acceso, este script esta probado con `JWT`. 
 
 ## Posts
 
@@ -26,6 +39,19 @@ await wp.posts(
         per_page: 3
       }
     ).get()
+```
+
+Para publicar un nuevo post es 
+
+```
+await wp.posts(
+      {
+        title: "titulo",
+        extract: "extracto",
+        content: "contenido"
+      }
+    ).publish()
+
 ```
 
 ## Pages
